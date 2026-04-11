@@ -1,35 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Marketing Dashboard Project</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Marketing Performance Dashboard – Johnson Sukumar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .project-hero {
+      padding: 120px 6% 60px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .project-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(244,130,58,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--teal);
+      text-decoration: none;
+      margin-bottom: 1.8rem;
+      transition: gap 0.2s;
+    }
+    .back-link:hover { gap: 10px; }
+    .project-hero-inner { max-width: 800px; }
+    .project-category {
+      display: inline-block;
+      background: rgba(244,130,58,0.10);
+      color: var(--orange);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(244,130,58,0.25);
+      margin-bottom: 1rem;
+    }
+    .project-hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--dark);
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .project-hero p {
+      font-size: 1rem;
+      color: var(--body);
+      line-height: 1.8;
+      max-width: 620px;
+      margin-bottom: 1.5rem;
+    }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .meta-item strong {
+      display: block;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+    }
+    .meta-item span { font-size: 0.92rem; color: var(--dark); font-weight: 500; }
+
+    .project-banner-img {
+      background: linear-gradient(135deg, #fde8d8 0%, #f9c9a8 100%);
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      margin: 0 6%;
+      border-radius: 20px;
+      position: relative;
+      top: -20px;
+      box-shadow: 0 8px 32px rgba(244,130,58,0.15);
+    }
+
+    /* mock dashboard inside banner */
+    .dashboard-mock {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      padding: 0 20px;
+    }
+    .bar {
+      width: 30px;
+      background: rgba(46,196,160,0.7);
+      border-radius: 4px 4px 0 0;
+    }
+    .bar.orange { background: rgba(244,130,58,0.7); }
+
+    .project-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 6% 80px;
+    }
+    .content-block { margin-bottom: 2.5rem; }
+    .content-block h2 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--bg);
+    }
+    .content-block p { font-size: 0.97rem; color: var(--body); line-height: 1.85; margin-bottom: 0.8rem; }
+    .content-block ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+    .content-block ul li { font-size: 0.95rem; color: var(--body); line-height: 1.7; padding-left: 1.4rem; position: relative; }
+    .content-block ul li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .result-card {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 1.4rem;
+      text-align: center;
+      border: 1px solid rgba(46,196,160,0.2);
+    }
+    .result-card .result-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 2rem; color: var(--teal); line-height: 1; margin-bottom: 0.4rem; }
+    .result-card .result-label { font-size: 0.82rem; color: var(--body); font-weight: 500; }
+
+    .tools-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+
+    /* dashboard widget preview */
+    .widget-preview {
+      background: #f8f9fa;
+      border: 1px solid #e8e8e8;
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-top: 1rem;
+    }
+    .widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .widget-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--dark); }
+    .widget-badge { font-size: 0.72rem; color: var(--teal); font-weight: 600; background: rgba(46,196,160,0.1); padding: 2px 8px; border-radius: 999px; }
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .kpi-box { text-align: center; }
+    .kpi-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--dark); }
+    .kpi-label { font-size: 0.7rem; color: #999; margin-top: 2px; }
+    .kpi-change { font-size: 0.72rem; color: var(--teal); font-weight: 600; }
+
+    .project-nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 1.5rem 6%;
+      border-top: 1px solid #eee;
+      background: var(--white);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .project-nav a { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.88rem; color: var(--teal); text-decoration: none; }
+    .project-nav a:hover { color: var(--teal-dk); }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>Marketing Dashboard</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="projects.html">Projects</a>
-  </nav>
-</header>
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo">Johnson Sukumar</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="btn-hire">Hire Me</a></li>
+  </ul>
+</nav>
 
-<section>
-  <h2>Problem</h2>
-  <p>Marketing team lacked a centralized dashboard to track campaign performance.</p>
+<!-- PROJECT HERO -->
+<div class="project-hero">
+  <div class="project-hero-inner">
+    <a href="projects.html" class="back-link">← Back to Projects</a>
+    <span class="project-category">SQL · Looker Studio</span>
+    <h1>Marketing Performance Dashboard</h1>
+    <p>Built an automated, real-time marketing dashboard using SQL and Looker Studio to track CAC, ROAS, and channel-level ROI — giving stakeholders instant visibility into campaign performance.</p>
+    <div class="meta-row">
+      <div class="meta-item"><strong>Tools</strong><span>SQL, Looker Studio</span></div>
+      <div class="meta-item"><strong>Type</strong><span>Dashboard & Reporting</span></div>
+      <div class="meta-item"><strong>Result</strong><span>60% Faster Reporting</span></div>
+    </div>
+  </div>
+</div>
 
-  <h2>Tools Used</h2>
-  <p>Power BI, Excel</p>
+<!-- BANNER -->
+<div class="project-banner-img">📈</div>
 
-  <h2>Approach</h2>
-  <p>Collected campaign data, cleaned it, and built an interactive dashboard tracking KPIs.</p>
+<!-- CONTENT -->
+<div class="project-content">
 
-  <h2>Results</h2>
-  <p>Improved reporting efficiency by 30% and enabled faster decision-making.</p>
-</section>
+  <div class="content-block">
+    <h2>🎯 The Problem</h2>
+    <p>The marketing team was spending 6+ hours every week manually compiling performance reports across Google Ads, Meta, and email campaigns in spreadsheets. Reports were always out of date by the time stakeholders read them.</p>
+    <p>There was no single source of truth for key metrics like ROAS, CAC, or channel-level contribution to revenue.</p>
+  </div>
 
-<footer><p>© 2026 Johnson Sukumar</p></footer>
+  <div class="content-block">
+    <h2>🔧 Tools Used</h2>
+    <div class="tools-row">
+      <span class="tag-pill">SQL (BigQuery)</span>
+      <span class="tag-pill">Looker Studio</span>
+      <span class="tag-pill">Google Sheets</span>
+      <span class="tag-pill">Google Ads API</span>
+      <span class="tag-pill">GA4</span>
+    </div>
+  </div>
+
+  <!-- Dashboard preview widget -->
+  <div class="content-block">
+    <h2>📊 Dashboard Preview</h2>
+    <div class="widget-preview">
+      <div class="widget-header">
+        <span class="widget-title">Marketing KPI Overview — April 2026</span>
+        <span class="widget-badge">● Live</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-box">
+          <div class="kpi-num">4.2x</div>
+          <div class="kpi-label">ROAS</div>
+          <div class="kpi-change">↑ 12%</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-num">₹320</div>
+          <div class="kpi-label">CAC</div>
+          <div class="kpi-change">↓ 8%</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-num">18.4%</div>
+          <div class="kpi-label">Conv. Rate</div>
+          <div class="kpi-change">↑ 3%</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-num">₹2.1L</div>
+          <div class="kpi-label">Revenue</div>
+          <div class="kpi-change">↑ 22%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h2>🛠️ Approach</h2>
+    <ul>
+      <li>Connected Google Ads, Meta Ads, and GA4 data into BigQuery using data transfer services</li>
+      <li>Wrote SQL queries to clean, join, and aggregate campaign data across all channels</li>
+      <li>Built calculated fields for CAC, ROAS, CPL, and channel contribution percentage</li>
+      <li>Designed a Looker Studio dashboard with date-range controls, channel filters, and drill-down views</li>
+      <li>Set up automated email delivery of the dashboard to stakeholders every Monday morning</li>
+    </ul>
+  </div>
+
+  <div class="content-block">
+    <h2>📈 Results</h2>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-num">60%</div>
+        <div class="result-label">Faster Weekly Reporting</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">Real-time</div>
+        <div class="result-label">Data Refresh</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">4</div>
+        <div class="result-label">Channels Unified</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">+22%</div>
+        <div class="result-label">Revenue Uplift Tracked</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h2>💡 Key Learnings</h2>
+    <ul>
+      <li>Automating data pipelines into BigQuery eliminated manual errors and saved hours weekly</li>
+      <li>Stakeholders engaged far more with visual dashboards than static spreadsheet exports</li>
+      <li>Consistent metric definitions (CAC, ROAS) across teams prevents misaligned reporting</li>
+      <li>Looker Studio's blended data sources are powerful but require clean SQL upstream</li>
+    </ul>
+  </div>
+
+  <a href="contact.html" class="btn-primary">💬 &nbsp;Discuss a Similar Project</a>
+
+</div>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <a href="project-ga4.html">← Prev: GA4 Tracking Setup</a>
+  <a href="project-sql.html">Next: Customer Segmentation →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>&copy; 2026 <strong>Johnson Sukumar</strong></span>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="contact.html">Contact</a>
+</footer>
 
 </body>
 </html>
