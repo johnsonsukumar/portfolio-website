@@ -1,68 +1,525 @@
+/* ============================================
+   Johnson Sukumar – Portfolio
+   Shared Stylesheet (style.css)
+   Link this in EVERY page's <head>
+   ============================================ */
+
+/* ── Google Fonts (also in each HTML <head>) ── */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap');
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── CSS VARIABLES ── */
+:root {
+  --teal:    #2ec4a0;
+  --teal-dk: #25a98a;
+  --orange:  #f4823a;
+  --dark:    #0f1b2d;
+  --body:    #5a6a7a;
+  --white:   #ffffff;
+  --bg:      #e8f8f4;
+}
+
+html { scroll-behavior: smooth; }
+
 body {
-  background: #0f172a;
-  color: #e2e8f0;
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
 }
 
-header {
+/* ============================================
+   NAVBAR
+   ============================================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 20px 50px;
+  padding: 0 6%;
+  height: 72px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
 }
 
-nav a {
-  margin-left: 20px;
+.logo {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--orange);
+  letter-spacing: -0.5px;
   text-decoration: none;
-  color: #e2e8f0;
 }
 
-nav a:hover {
-  color: #38bdf8;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
 }
 
-section {
-  padding: 50px;
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.2s;
+  position: relative;
 }
 
-.hero {
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 2px;
+  background: var(--teal);
+  transform: scaleX(0);
+  transition: transform 0.25s;
+  border-radius: 2px;
+}
+
+.nav-links a:hover { color: var(--teal); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+/* active page highlight */
+.nav-links a.active {
+  color: var(--teal);
+}
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+.btn-hire {
+  background: var(--teal) !important;
+  color: var(--white) !important;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.55rem 1.4rem !important;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.15s !important;
+}
+.btn-hire::after { display: none !important; }
+.btn-hire:hover {
+  background: var(--teal-dk) !important;
+  transform: translateY(-1px);
+  color: var(--white) !important;
+}
+
+/* ============================================
+   PAGE WRAPPER (for inner pages - not hero)
+   Add class="page-wrap" to your main content div
+   ============================================ */
+.page-wrap {
+  padding: 110px 6% 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   PAGE HEADER (used on About, Projects, Contact)
+   ============================================ */
+.page-header {
   text-align: center;
-  padding: 100px 20px;
+  padding: 120px 6% 60px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
 }
 
-.btn {
-  background: #38bdf8;
-  padding: 10px 20px;
-  color: #0f172a;
-  border-radius: 5px;
-  text-decoration: none;
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 100%, rgba(46,196,160,0.18) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 50px;
+.page-header .section-tag {
+  color: var(--orange);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+  display: block;
 }
 
-.card {
-  background: #1e293b;
-  padding: 20px;
+.page-header h1 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--dark);
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.page-header p {
+  color: var(--body);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   SECTION TITLES (reusable across all pages)
+   ============================================ */
+.section-tag {
+  color: var(--orange);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--dark);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.section-sub {
+  color: var(--body);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  max-width: 560px;
+}
+
+/* ============================================
+   BUTTONS (reusable)
+   ============================================ */
+.btn-primary {
+  display: inline-block;
+  background: var(--teal);
+  color: var(--white);
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.85rem 2rem;
   border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(46,196,160,0.35);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 
-.contact input,
-.contact textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-  border: none;
+.btn-primary:hover {
+  background: var(--teal-dk);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(46,196,160,0.42);
 }
 
-.contact button {
-  padding: 10px 20px;
-  background: #38bdf8;
-  border: none;
-  border-radius: 5px;
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--teal);
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  border: 2px solid var(--teal);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.btn-outline:hover {
+  background: var(--teal);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   CARDS (for projects, skills etc.)
+   ============================================ */
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.11);
+}
+
+.card-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: rgba(46,196,160,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: var(--body);
+  line-height: 1.7;
+}
+
+/* ============================================
+   TAG PILLS (skills/tools)
+   ============================================ */
+.tag-pill {
+  display: inline-block;
+  background: rgba(46,196,160,0.12);
+  color: var(--teal-dk);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(46,196,160,0.28);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes morph {
+  0%   { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; }
+  100% { border-radius: 40% 60% 45% 55% / 55% 45% 60% 40%; }
+}
+
+.anim-fade-up { animation: fadeUp 0.75s ease both; }
+
+/* ============================================
+   STATS ROW (used on index + can reuse)
+   ============================================ */
+.stats-row {
+  background: var(--white);
+  padding: 2.8rem 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid #eee;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.03);
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+  min-width: 130px;
+  padding: 0 1.5rem;
+}
+
+.stat-num {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--teal);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.divider {
+  width: 1px;
+  height: 50px;
+  background: #e0e0e0;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 1.4rem 6%;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+footer strong { color: var(--teal); }
+
+footer a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover { color: var(--teal); }
+
+/* ============================================
+   HERO (index.html only)
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  background: var(--bg);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 100px 6% 60px;
+  position: relative;
+  overflow: hidden;
+  gap: 2rem;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 65% at 72% 58%, rgba(46,196,160,0.20) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 40% at 88% 14%, rgba(46,196,160,0.10) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-left  { position: relative; z-index: 3; animation: fadeUp 0.75s ease both; }
+.hero-tag   { display: inline-block; color: var(--orange); font-weight: 600; font-size: 1rem; margin-bottom: 0.9rem; animation: fadeUp 0.75s 0.1s ease both; }
+.hero-name  { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.8vw, 3.1rem); line-height: 1.15; color: var(--dark); margin-bottom: 0.4rem; letter-spacing: -1px; animation: fadeUp 0.75s 0.15s ease both; }
+.hero-role  { font-family: 'Sora', sans-serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.4rem); color: var(--teal); margin-bottom: 1.2rem; animation: fadeUp 0.75s 0.2s ease both; }
+.hero-tags  { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.4rem; animation: fadeUp 0.75s 0.25s ease both; }
+.hero-desc  { font-size: 0.98rem; color: var(--body); line-height: 1.8; max-width: 430px; margin-bottom: 2.2rem; animation: fadeUp 0.75s 0.3s ease both; }
+.hero-btns  { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.75s 0.35s ease both; }
+
+.hero-right {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeUp 0.9s 0.2s ease both;
+}
+
+.photo-wrap { position: relative; width: 420px; height: 460px; }
+
+.photo-blob1 {
+  position: absolute; width: 360px; height: 360px;
+  background: rgba(46,196,160,0.28);
+  border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+  bottom: 0; right: 0;
+  animation: morph 8s ease-in-out infinite alternate;
+}
+
+.photo-blob2 {
+  position: absolute; width: 195px; height: 195px;
+  background: rgba(46,196,160,0.16);
+  border-radius: 50% 60% 40% 55% / 55% 40% 60% 45%;
+  top: 0; right: 30px;
+  animation: morph 6s ease-in-out infinite alternate-reverse;
+}
+
+.photo-img {
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 300px; height: 390px;
+  object-fit: cover; object-position: top;
+  border-radius: 18px 18px 0 0;
+  z-index: 2;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.avatar-card {
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 280px; height: 370px;
+  background: linear-gradient(160deg, #1b3450 0%, #0e1e32 100%);
+  border-radius: 18px 18px 0 0;
+  z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.20);
+}
+
+.avatar-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-weight: 800;
+  font-size: 2.2rem; color: var(--white);
+  box-shadow: 0 8px 24px rgba(46,196,160,0.45);
+}
+
+.avatar-name      { font-family: 'Sora', sans-serif; font-weight: 700; color: var(--white); font-size: 1rem; text-align: center; }
+.avatar-role-text { color: var(--teal); font-size: 0.8rem; font-weight: 500; text-align: center; }
+
+.badge {
+  position: absolute;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 0.6rem 0.9rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index: 4;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.badge.left { left: -5px; bottom: 110px; animation: fadeUp 1s 0.5s ease both; }
+.badge.top  { right: 5px; top: 50px;    animation: fadeUp 1s 0.65s ease both; }
+
+.badge-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: rgba(46,196,160,0.14);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+
+.badge-text strong { display: block; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--dark); line-height: 1.2; }
+.badge-text span   { font-size: 0.7rem; color: #999; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 110px 5% 60px;
+  }
+  .hero-right { order: -1; }
+  .hero-tags, .hero-btns { justify-content: center; }
+  .hero-desc { margin: 0 auto 2rem; }
+  .badge.left { left: 5px; }
+  .badge.top  { right: 5px; }
+  .photo-wrap  { width: 300px; height: 340px; }
+  .avatar-card { width: 220px; height: 290px; }
+  .divider { display: none; }
+  .page-header { padding: 110px 5% 50px; }
+}
+
+@media (max-width: 520px) {
+  nav { padding: 0 4%; }
+  .nav-links { gap: 1rem; }
+  .logo { font-size: 1rem; }
+  .nav-links a { font-size: 0.82rem; }
+  .page-wrap { padding: 100px 4% 50px; }
 }
