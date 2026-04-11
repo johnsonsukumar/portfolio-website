@@ -1,41 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Johnson Sukumar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Johnson Sukumar – Contact</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .contact-section {
+      padding: 60px 6% 80px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    /* LEFT – contact info */
+    .contact-info h2 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 1.7rem;
+      color: var(--dark);
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+
+    .contact-info p {
+      color: var(--body);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(46,196,160,0.12);
+      border: 1px solid rgba(46,196,160,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item-text strong {
+      display: block;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+
+    .contact-item-text span {
+      font-size: 0.85rem;
+      color: var(--body);
+    }
+
+    .contact-item-text a {
+      font-size: 0.85rem;
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .contact-item-text a:hover { text-decoration: underline; }
+
+    /* RIGHT – form */
+    .contact-form {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2.2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .contact-form h3 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--dark);
+      font-family: 'Sora', sans-serif;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.75rem 1rem;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      color: var(--dark);
+      background: #fafafa;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(46,196,160,0.15);
+      background: var(--white);
+    }
+
+    .form-group textarea { height: 130px; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--teal);
+      color: var(--white);
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.95rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(46,196,160,0.35);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      background: var(--teal-dk);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(46,196,160,0.42);
+    }
+
+    /* success state */
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(46,196,160,0.08);
+      border: 1px solid rgba(46,196,160,0.3);
+      border-radius: 12px;
+      color: var(--teal-dk);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 860px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>Johnson Sukumar</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo">Johnson Sukumar</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="contact.html" class="btn-hire">Hire Me</a></li>
+  </ul>
+</nav>
 
-<section class="contact">
-  <h2 style="text-align:center;">Contact Me</h2>
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <span class="section-tag">Get In Touch</span>
+  <h1>Contact Me</h1>
+  <p>Have a project in mind or want to discuss marketing analytics? I'd love to hear from you.</p>
+</div>
 
-  <form action="https://formspree.io/f/your-form-id" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" rows="5" placeholder="Your Message"></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="contact-grid">
 
+    <!-- LEFT: Info -->
+    <div class="contact-info">
+      <h2>Let's Work<br>Together</h2>
+      <p>Whether you need help with GA4 setup, performance reporting, or full analytics strategy — I'm available for freelance projects and full-time opportunities.</p>
+
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div class="contact-item-text">
+          <strong>Email</strong>
+          <a href="mailto:johnson@example.com">johnson@example.com</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">💼</div>
+        <div class="contact-item-text">
+          <strong>LinkedIn</strong>
+          <a href="https://linkedin.com/in/johnsonsukumar" target="_blank">linkedin.com/in/johnsonsukumar</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-item-text">
+          <strong>Location</strong>
+          <span>Hyderabad, India</span>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">⚡</div>
+        <div class="contact-item-text">
+          <strong>Response Time</strong>
+          <span>Usually within 24 hours</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="contact-form">
+      <h3>Send a Message</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="e.g. Priya Sharma" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" placeholder="e.g. GA4 Implementation Project" />
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell me about your project or what you need help with..."></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="handleSubmit()">✉️ &nbsp;Send Message</button>
+
+      <div class="success-msg" id="successMsg">
+        ✅ Message sent! I'll get back to you within 24 hours.
+      </div>
+    </div>
+
+  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Johnson Sukumar</p>
+  <span>&copy; 2026 <strong>Johnson Sukumar</strong></span>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="contact.html">Contact</a>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  function handleSubmit() {
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      alert('Please fill in your name, email, and message.');
+      return;
+    }
+
+    // Show success message (wire up to your backend/Formspree as needed)
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('name').value    = '';
+    document.getElementById('email').value   = '';
+    document.getElementById('subject').value = '';
+    document.getElementById('message').value = '';
+  }
+</script>
 
 </body>
 </html>
