@@ -1,34 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Johnson Sukumar | Home</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Johnson Sukumar – Marketing Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<header>
-  <h1>Johnson Sukumar</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
+<!-- ═══════════════════════════════════════════════════════
+     NAVBAR — Copy this exact block into EVERY HTML page.
+     On each page, add class="active" to the matching link.
+  ═══════════════════════════════════════════════════════ -->
+<nav>
+  <a href="index.html" class="logo">Johnson Sukumar</a>
+  <ul class="nav-links">
+    <li><a href="index.html"    class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html"  class="btn-hire">Hire Me</a></li>
+  </ul>
+</nav>
 
+<!-- ── HERO ── -->
 <section class="hero">
-  <h2>Driving Revenue Growth Through Marketing Data Insights</h2>
-  <p>Marketing Analyst | GA4 | GTM | Performance Marketing</p>
-  <a href="resume.pdf" class="btn" download>Download Resume</a>
+
+  <div class="hero-left">
+    <span class="hero-tag">Hello, I am</span>
+    <h1 class="hero-name">Johnson Sukumar,</h1>
+    <p class="hero-role">Marketing Analyst</p>
+
+    <div class="hero-tags">
+      <span class="tag-pill">GA4</span>
+      <span class="tag-pill">GTM</span>
+      <span class="tag-pill">Performance Marketing</span>
+      <span class="tag-pill">Data Insights</span>
+    </div>
+
+    <p class="hero-desc">
+      Driving revenue growth through marketing data insights. Specialising in analytics, tracking, and performance strategy to help brands make smarter, faster decisions.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#" class="btn-primary">⬇&nbsp; Download Resume</a>
+      <a href="contact.html" class="btn-outline">Contact Me</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="photo-wrap">
+      <div class="photo-blob1"></div>
+      <div class="photo-blob2"></div>
+      <!--
+        TO ADD YOUR PHOTO replace the div below with:
+        <img class="photo-img" src="your-photo.jpg" alt="Johnson Sukumar">
+      -->
+      <div class="avatar-card">
+        <div class="avatar-circle">JS</div>
+        <div class="avatar-name">Johnson Sukumar</div>
+        <div class="avatar-role-text">Marketing Analyst</div>
+      </div>
+      <div class="badge left">
+        <div class="badge-icon">📊</div>
+        <div class="badge-text"><strong>GA4 Expert</strong><span>Google Analytics</span></div>
+      </div>
+      <div class="badge top">
+        <div class="badge-icon">🚀</div>
+        <div class="badge-text"><strong>Performance</strong><span>Revenue Growth</span></div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
-<footer>
-  <p>© 2026 Johnson Sukumar</p>
-</footer>
+<!-- ── STATS ── -->
+<div class="stats-row">
+  <div class="stat-item"><div class="stat-num">3+</div><div class="stat-label">Years Experience</div></div>
+  <div class="divider"></div>
+  <div class="stat-item"><div class="stat-num">GA4</div><div class="stat-label">Google Analytics</div></div>
+  <div class="divider"></div>
+  <div class="stat-item"><div class="stat-num">GTM</div><div class="stat-label">Tag Management</div></div>
+  <div class="divider"></div>
+  <div class="stat-item"><div class="stat-num">↑ ROI</div><div class="stat-label">Data-Driven Growth</div></div>
+</div>
 
-<script src="script.js"></script>
+<!-- ── FOOTER ── -->
+<footer>
+  <span>&copy; 2026 <strong>Johnson Sukumar</strong></span>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="contact.html">Contact</a>
+</footer>
 
 </body>
 </html>
