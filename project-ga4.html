@@ -1,35 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>GA4 Funnel Analysis</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GA4 E-commerce Tracking – Johnson Sukumar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .project-hero {
+      padding: 120px 6% 60px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .project-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(46,196,160,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--teal);
+      text-decoration: none;
+      margin-bottom: 1.8rem;
+      transition: gap 0.2s;
+    }
+    .back-link:hover { gap: 10px; }
+
+    .project-hero-inner {
+      max-width: 800px;
+    }
+    .project-category {
+      display: inline-block;
+      background: rgba(46,196,160,0.12);
+      color: var(--teal-dk);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(46,196,160,0.28);
+      margin-bottom: 1rem;
+    }
+    .project-hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--dark);
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .project-hero p {
+      font-size: 1rem;
+      color: var(--body);
+      line-height: 1.8;
+      max-width: 620px;
+      margin-bottom: 1.5rem;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .meta-item strong {
+      display: block;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+    }
+    .meta-item span {
+      font-size: 0.92rem;
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    /* BANNER */
+    .project-banner-img {
+      background: linear-gradient(135deg, #d4f5ed 0%, #a8edd9 100%);
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      margin: 0 6%;
+      border-radius: 20px;
+      position: relative;
+      top: -20px;
+      box-shadow: 0 8px 32px rgba(46,196,160,0.2);
+    }
+
+    /* CONTENT */
+    .project-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 6% 80px;
+    }
+
+    .content-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .content-block h2 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--bg);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .content-block p {
+      font-size: 0.97rem;
+      color: var(--body);
+      line-height: 1.85;
+      margin-bottom: 0.8rem;
+    }
+
+    .content-block ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .content-block ul li {
+      font-size: 0.95rem;
+      color: var(--body);
+      line-height: 1.7;
+      padding-left: 1.4rem;
+      position: relative;
+    }
+
+    .content-block ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* result cards */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .result-card {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 1.4rem;
+      text-align: center;
+      border: 1px solid rgba(46,196,160,0.2);
+    }
+
+    .result-card .result-num {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .result-card .result-label {
+      font-size: 0.82rem;
+      color: var(--body);
+      font-weight: 500;
+    }
+
+    /* tools */
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .project-nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 1.5rem 6%;
+      border-top: 1px solid #eee;
+      background: var(--white);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .project-nav a {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .project-nav a:hover { color: var(--teal-dk); }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>GA4 Funnel Analysis</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="projects.html">Projects</a>
-  </nav>
-</header>
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo">Johnson Sukumar</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="btn-hire">Hire Me</a></li>
+  </ul>
+</nav>
 
-<section>
-  <h2>Problem</h2>
-  <p>High drop-off rate in user conversion funnel.</p>
+<!-- PROJECT HERO -->
+<div class="project-hero">
+  <div class="project-hero-inner">
+    <a href="projects.html" class="back-link">← Back to Projects</a>
+    <span class="project-category">GA4 · Google Tag Manager</span>
+    <h1>GA4 E-commerce Tracking Setup</h1>
+    <p>Full Google Analytics 4 implementation for an e-commerce store — including enhanced measurement, custom events, GTM container setup, and conversion tracking to accurately measure the full purchase funnel.</p>
+    <div class="meta-row">
+      <div class="meta-item"><strong>Tools</strong><span>GA4, GTM</span></div>
+      <div class="meta-item"><strong>Type</strong><span>Analytics Implementation</span></div>
+      <div class="meta-item"><strong>Result</strong><span>+18% Conversion Rate</span></div>
+    </div>
+  </div>
+</div>
 
-  <h2>Tools Used</h2>
-  <p>GA4, Google Tag Manager</p>
+<!-- BANNER -->
+<div class="project-banner-img">📊</div>
 
-  <h2>Approach</h2>
-  <p>Analyzed user journey and identified drop-off points using funnel exploration.</p>
+<!-- CONTENT -->
+<div class="project-content">
 
-  <h2>Results</h2>
-  <p>Improved conversion rate by 18% through optimization.</p>
-</section>
+  <div class="content-block">
+    <h2>🎯 The Problem</h2>
+    <p>The client's e-commerce store was running on Universal Analytics (UA) with incomplete tracking — missing add-to-cart events, checkout steps, and purchase data. With UA sunsetting, a full GA4 migration was critical.</p>
+    <p>There was also a high drop-off rate in the user conversion funnel with no data to identify where users were abandoning.</p>
+  </div>
 
-<footer><p>© 2026 Johnson Sukumar</p></footer>
+  <div class="content-block">
+    <h2>🔧 Tools Used</h2>
+    <div class="tools-row">
+      <span class="tag-pill">Google Analytics 4</span>
+      <span class="tag-pill">Google Tag Manager</span>
+      <span class="tag-pill">GA4 DebugView</span>
+      <span class="tag-pill">Looker Studio</span>
+      <span class="tag-pill">Chrome DevTools</span>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h2>🛠️ Approach</h2>
+    <ul>
+      <li>Audited the existing UA setup and documented all existing tags, triggers, and goals</li>
+      <li>Set up a new GA4 property and connected it via GTM using the GA4 Configuration tag</li>
+      <li>Implemented enhanced e-commerce events: <code style="background:#f0f0f0;padding:2px 6px;border-radius:4px;font-size:0.85rem;">view_item</code>, <code style="background:#f0f0f0;padding:2px 6px;border-radius:4px;font-size:0.85rem;">add_to_cart</code>, <code style="background:#f0f0f0;padding:2px 6px;border-radius:4px;font-size:0.85rem;">begin_checkout</code>, <code style="background:#f0f0f0;padding:2px 6px;border-radius:4px;font-size:0.85rem;">purchase</code></li>
+      <li>Configured custom dimensions for user type, product category, and traffic source</li>
+      <li>Used Funnel Exploration reports in GA4 to identify drop-off points in the checkout flow</li>
+      <li>Built a Looker Studio dashboard for real-time e-commerce KPI monitoring</li>
+    </ul>
+  </div>
+
+  <div class="content-block">
+    <h2>📈 Results</h2>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-num">+18%</div>
+        <div class="result-label">Conversion Rate Improvement</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">100%</div>
+        <div class="result-label">Purchase Event Coverage</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">-32%</div>
+        <div class="result-label">Checkout Drop-off Rate</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">3x</div>
+        <div class="result-label">More Actionable Data Points</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h2>💡 Key Learnings</h2>
+    <ul>
+      <li>GA4's event-based model requires a completely different tagging strategy vs Universal Analytics</li>
+      <li>GTM's dataLayer is essential for passing e-commerce data accurately to GA4</li>
+      <li>DebugView is invaluable for real-time tag validation before publishing</li>
+      <li>Funnel exploration reports in GA4 immediately revealed a major drop-off at the payment step</li>
+    </ul>
+  </div>
+
+  <a href="contact.html" class="btn-primary">💬 &nbsp;Discuss a Similar Project</a>
+
+</div>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <a href="projects.html">← All Projects</a>
+  <a href="project-dashboard.html">Next: Marketing Dashboard →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>&copy; 2026 <strong>Johnson Sukumar</strong></span>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="contact.html">Contact</a>
+</footer>
 
 </body>
 </html>
